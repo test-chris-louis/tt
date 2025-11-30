@@ -1,1 +1,217 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Turbotienda — Private Preview</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate" /><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, notranslate" /><meta http-equiv="X-Robots-Tag" content="noindex, nofollow, noarchive" /><meta name="turbo" content="no-prerender" /><style> :root{--primary:#13B4A8;--primary-dark:#0E8E84;--accent:#FFC63A;--bg:#070B12;--card:#0B111A;--text:#D9E6F2;} *{box-sizing:border-box} html,body{height:100%} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;} a{color:inherit;text-decoration:none} .container{max-width:1180px;padding:0 24px;margin:0 auto} .nav-wrap{position:fixed;inset:0 auto auto 0;width:100%;display:flex;justify-content:center;pointer-events:none;z-index:40;transition:opacity .4s,transform .4s} .nav{margin-top:16px;width:min(1180px,calc(100% - 32px));background:color-mix(in lab,white 6%,transparent);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;pointer-events:auto} .nav .brand{display:flex;align-items:center;gap:10px;font-weight:700} .brand-dot{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-dark))} .nav-links{display:none;gap:22px;opacity:.8} .btn{appearance:none;border:0;cursor:pointer;font-weight:700;padding:12px 18px;border-radius:12px} .btn-primary{background:var(--primary);color:#000;box-shadow:0 10px 30px rgba(19,180,168,.45)} .btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)} @media (min-width:860px){.nav-links{display:flex}} .hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden} .hero-bg{position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(60% 60% at 50% 10%,color-mix(in lab,var(--primary) 20%,transparent),transparent 70%),radial-gradient(50% 50% at 70% 30%,color-mix(in lab,var(--accent) 12%,transparent),transparent 70%)} .hero-grid{position:absolute;inset:0;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:40px 40px} .hero-noise{position:absolute;inset:0;opacity:.06;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>')} .hero-inner{position:relative;text-align:center;padding:0 24px;padding-bottom:140px} .chip{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:999px;backdrop-filter:blur(8px);font-size:12px;opacity:.9} .title{margin:.6rem 0 0;font-size:clamp(40px,6vw,76px);font-weight:900;letter-spacing:-.02em} .title .gradient{background:linear-gradient(90deg,var(--primary),#6ee7e7,var(--accent),var(--primary));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:300% 100%;animation:shine 8s linear infinite} .subtitle{max-width:min(700px,90vw);margin:16px auto 0;color:rgba(255,255,255,.78)} .cta{display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap} .tickers{position:absolute;inset-inline:0;bottom:14px} .ticker{overflow:hidden} .ticker .row{display:flex;gap:28px;white-space:nowrap;animation:marquee 26s linear infinite;will-change:transform} .ticker .row.rev{animation-direction:reverse} .ticker span{letter-spacing:.35em;font-size:clamp(12px,1.2vw,18px);color:rgba(255,255,255,.8)} .ticker[data-opacity="25"]{opacity:.25}.ticker[data-opacity="35"]{opacity:.35} @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}} @keyframes shine{0%{background-position:200% 0}100%{background-position:-200% 0}} .hero-canvas{position:absolute;inset:0;z-index:-1} .orb{position:absolute;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#fff0 40%),radial-gradient(circle,var(--accent) 0,var(--accent) 20%,#ffffff00 60%);box-shadow:0 0 30px color-mix(in lab,var(--accent) 40%,transparent);filter:saturate(120%)} section{padding:88px 0} .grid{display:grid;gap:20px} @media (min-width:720px){.grid.cols-4{grid-template-columns:repeat(4,1fr)}} @media (min-width:540px) and (max-width:719px){.grid.cols-4{grid-template-columns:repeat(2,1fr)}} .card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.35)} .card h3{margin:10px 0 6px;font-size:18px} .card p{margin:0;color:rgba(255,255,255,.75)} .icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06)} .cta-wrap{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:linear-gradient(135deg,#0B111A,#0E1A24);padding:28px;overflow:hidden} .cta-wrap .blob{position:absolute;width:260px;height:260px;border-radius:50%;filter:blur(60px);opacity:.28} .cta-wrap .blob.a{left:-80px;top:-80px;background:color-mix(in lab,var(--primary) 40%,transparent)} .cta-wrap .blob.b{right:-80px;bottom:-80px;background:color-mix(in lab,var(--accent) 34%,transparent)} .form{display:flex;gap:12px;flex-wrap:wrap} .input{flex:1 1 240px;height:46px;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:0 12px;outline:none} .input::placeholder{color:rgba(255,255,255,.45)} footer{border-top:1px solid rgba(255,255,255,.12);padding:28px 0;color:rgba(255,255,255,.6)} @media (prefers-reduced-motion:reduce){.ticker .row{animation:none}.title .gradient{animation:none}} .hero{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px} h1,h2,p{margin:0;padding:0;color:white;text-shadow:0 0 20px rgba(0,0,0,1);line-height:100%;user-select:none} .gradient{text-shadow:none} h1{font-size:80px;font-weight:700;text-transform:uppercase} </style></head><body><div id="navWrap" class="nav-wrap" style="opacity:0;transform:translateY(-8px)"><nav class="nav"><div class="brand"><span>Turbotienda</span></div><div class="nav-links"><a href="#features">SE VIENE EL FUTURO DEL E-COMMERCE</a></div><button class="btn btn-primary">Probar</button></nav></div><section id="hero" class="hero"><div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-noise"></div><canvas id="tubes" class="hero-canvas" aria-hidden="true"></canvas><div id="orb" class="orb" aria-hidden="true"></div><div class="hero-inner container"><div class="chip">Private Preview · Turbotienda</div><h1 class="title">Se viene el <span class="gradient">futuro</span> del e-commerce</h1><div class="tickers container"><div class="ticker" data-opacity="25"><div class="row"><span>Se viene el futuro del e-commerce</span><span>Se viene el futuro del e-commerce</span><span>Se viene el futuro del e-commerce</span><span>Se viene el futuro del e-commerce</span><span>Se viene el futuro del e-commerce</span><span>Se viene el futuro del e-commerce</span></div></div><div class="ticker" data-opacity="35"><div class="row rev"><span>Turbotienda · Private Preview</span><span>Turbotienda · Private Preview</span><span>Turbotienda · Private Preview</span><span>Turbotienda · Private Preview</span><span>Turbotienda · Private Preview</span><span>Turbotienda · Private Preview</span></div></div><div class="ticker" data-opacity="25"><div class="row"><span>Velocidad · Diseño · Simplicidad</span><span>Velocidad · Diseño · Simplicidad</span><span>Velocidad · Diseño · Simplicidad</span><span>Velocidad · Diseño · Simplicidad</span><span>Velocidad · Diseño · Simplicidad</span><span>Velocidad · Diseño · Simplicidad</span></div></div></div></div></section><section id="features"><div class="container"><div class="grid cols-4"><div class="card"><div class="icon">⚡️</div><h3>Rápido</h3><p>Cargá y navegá sin fricción.</p></div><div class="card"><div class="icon">🛡️</div><h3>Seguro</h3><p>Buen trato de datos.</p></div><div class="card"><div class="icon">🧠</div><h3>Inteligente</h3><p>Ayuda en tareas repetitivas.</p></div><div class="card"><div class="icon">🚀</div><h3>Escalable</h3><p>Pensado para crecer.</p></div></div></div></section><section id="cta"><div class="container"><div class="cta-wrap"><div class="blob a"></div><div class="blob b"></div><div class="grid" style="grid-template-columns:1.4fr 1fr;align-items:center;gap:24px"><div><h2 style="margin:0 0 8px;font-size:clamp(22px,3.2vw,32px)">¿Querés enterarte primero?</h2><p style="margin:0;opacity:.8">Dejanos tu mail y te avisamos.</p></div><form id="waitlist" class="form"><input class="input" type="email" name="email" placeholder="tu@email.com" required /><button class="btn btn-primary" type="submit">Quiero probar</button></form></div></div></div></section><footer><div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px"><div>© <span id="year"></span> Turbotienda — DATAXYPE SAS</div><div style="opacity:.7">Private Preview</div></div></footer><script> const $=(s,r=document)=>r.querySelector(s); const hero=$('#hero'); const navWrap=$('#navWrap'); const yearEl=$('#year');yearEl.textContent=new Date().getFullYear(); const onScrollNav=()=>{const show=(window.scrollY||0)>window.innerHeight*0.5;navWrap.style.opacity=show?'1':'0';navWrap.style.transform=show?'translateY(0)':'translateY(-8px)';navWrap.style.pointerEvents=show?'auto':'none';}; onScrollNav();addEventListener('scroll',onScrollNav,{passive:true}); $('#waitlist').addEventListener('submit',e=>{e.preventDefault();const email=new FormData(e.currentTarget).get('email');try{localStorage.setItem('turbotienda_waitlist',String(email));}catch{}e.currentTarget.querySelector('button').textContent='¡Anotado!';}); const canvas=$('#tubes');const ctx=canvas.getContext('2d');let dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1)); const resize=()=>{const r=hero.getBoundingClientRect();const w=Math.max(1,Math.floor(r.width*dpr));const h=Math.max(1,Math.floor(r.height*dpr));canvas.width=w;canvas.height=h;canvas.style.width=r.width+'px';canvas.style.height=r.height+'px';}; const points=[];let active=false;let idleT=0; function addPoint(x,y){points.push({x,y,life:1});if(points.length>200)points.shift();} function drawPath(color,width,alpha){ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=width;ctx.strokeStyle=color;ctx.globalAlpha=alpha;ctx.beginPath();for(let i=0;i<points.length;i++){const p=points[i];if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);}ctx.stroke();ctx.globalAlpha=1;} function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);if(points.length){ctx.save();ctx.globalCompositeOperation='lighter';for(let i=0;i<points.length;i++){const p=points[i];const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,34);g.addColorStop(0,'rgba(255,255,255,'+(0.16*p.life)+')');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,34,0,Math.PI*2);ctx.fill();}drawPath('#13B4A8',22,0.95);drawPath('#7af2f2',14,0.8);drawPath('#0E8E84',10,0.9);drawPath('#FFC63A',5,0.75);ctx.restore();for(const p of points){p.life*=0.965;}while(points.length&&points[0].life<0.05)points.shift();}requestAnimationFrame(draw);} const orb=$('#orb');let target={x:0,y:0}; function placeOrb(x,y){orb.style.transform=`translate(${x-9}px,${y-9}px)`;} function orbitStep(){const r=hero.getBoundingClientRect();const t=idleT*0.0016;const radius=Math.min(r.width,r.height)*0.22;const cx=r.width/2,cy=r.height/2;const x=cx+Math.cos(t)*radius;const y=cy+Math.sin(t*1.2)*(radius*0.6);target.x=x;target.y=y;const px=x*dpr;const py=y*dpr;addPoint(px,py);} function tick(){idleT+=16;if(!active)orbitStep();const rect=hero.getBoundingClientRect();const cur=orb.getBoundingClientRect();const ox=(cur.left-rect.left)+9;const oy=(cur.top-rect.top)+9;const nx=ox+(target.x-ox)*0.12;const ny=oy+(target.y-oy)*0.12;placeOrb(nx,ny);requestAnimationFrame(tick);} function heroToCanvas(e){const r=hero.getBoundingClientRect();const x=(e.clientX-r.left)*dpr;const y=(e.clientY-r.top)*dpr;return{x,y};} hero.addEventListener('pointerenter',()=>{active=true;}); hero.addEventListener('pointerleave',()=>{active=false;}); hero.addEventListener('pointermove',e=>{if(!active)return;const p=heroToCanvas(e);addPoint(p.x,p.y);target.x=(p.x/dpr);target.y=(p.y/dpr);}); const ro=new ResizeObserver(resize);ro.observe(hero);resize();draw();placeOrb(hero.clientWidth/2,hero.clientHeight/2);tick(); if(matchMedia('(prefers-reduced-motion: reduce)').matches){canvas.style.display='none';orb.style.display='none';} </script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Orbitienda — Estamos creando el futuro del e-commerce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bloquear indexación -->
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="googlebot" content="noindex,nofollow" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body,
+      html,
+      #app {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        touch-action: none;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Montserrat", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(0, 229, 212, 0.2), transparent 55%),
+          radial-gradient(circle at bottom, #000814, #020617);
+        color: #e5f5ff;
+      }
+
+      #app {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      #canvas {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      /* Overlay Orbitienda */
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+        max-width: 460px;
+        width: 100%;
+        padding: 24px 22px 20px;
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at top left, rgba(0, 229, 212, 0.16), transparent 60%),
+          rgba(15, 23, 42, 0.94);
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(16px);
+      }
+
+      @media (min-width: 720px) {
+        .overlay {
+          padding: 30px 26px 22px;
+        }
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .logo-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 30% 20%, #ffffff, rgba(255, 255, 255, 0) 55%),
+          conic-gradient(from 210deg, #00e5d4, #0095a0, #00e5d4);
+        position: relative;
+        box-shadow:
+          0 0 0 1px rgba(15, 23, 42, 0.8),
+          0 12px 26px rgba(0, 0, 0, 0.75);
+      }
+
+      .logo-icon::after {
+        content: "";
+        position: absolute;
+        inset: 7px;
+        border-radius: 999px;
+        border: 2px solid rgba(15, 23, 42, 0.9);
+        border-top-color: rgba(255, 255, 255, 0.7);
+        opacity: 0.8;
+      }
+
+      .logo-text {
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        font-size: 1rem;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #9caec4;
+        margin-bottom: 6px;
+      }
+
+      .title {
+        font-size: 1.8rem;
+        line-height: 1.15;
+        margin: 0 0 10px;
+      }
+
+      .subtitle {
+        margin: 0 0 18px;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: #a9bdd5;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-primary {
+        border: none;
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #00e5d4, #4dffd1);
+        color: #021417;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 14px 30px rgba(0, 229, 212, 0.4);
+        transition: transform 0.1s ease, box-shadow 0.1s.ease, filter 0.1s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 40px rgba(0, 229, 212, 0.5);
+        filter: brightness(1.03);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 0 9px 20px rgba(0, 229, 212, 0.35);
+      }
+
+      .note {
+        margin: 0;
+        font-size: 0.78rem;
+        color: #9caec4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <canvas id="canvas"></canvas>
+
+      <div class="overlay">
+        <div class="brand">
+          <div class="logo-icon" aria-hidden="true"></div>
+          <div class="logo-text">Orbitienda</div>
+        </div>
+
+        <p class="eyebrow">Próximamente</p>
+
+        <h1 class="title">
+          Estamos creando el futuro del e-commerce.
+        </h1>
+
+        <p class="subtitle">
+          Una nueva forma de vender online, simple, cercana y pensada para
+          emprendedores y negocios de todos los tamaños.
+        </p>
+
+        <div class="cta-row">
+         
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import AttractionCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.26/build/cursors/attraction1.min.js";
+
+      const app = AttractionCursor(document.getElementById("canvas"), {
+        particles: {
+          attractionIntensity: 0.75,
+          size: 1.5
+        }
+      });
+
+      // Fijamos los colores de las luces al Orbital Teal (y variante)
+      app.particles.light1.color.set(0x00e5d4); // Orbital Teal
+      app.particles.light2.color.set(0x0095a0); // Teal más oscuro
+    </script>
+  </body>
+</html>
