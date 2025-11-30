@@ -1,217 +1,676 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Orbitienda — Estamos creando el futuro del e-commerce</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbitienda — Plataforma en construcción</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Orbitienda es una compañía de tecnología enfocada en comercio digital. Nuestra plataforma se encuentra actualmente en construcción."
+  />
+  <style>
+    :root {
+      --color-bg-dark: #020617;
+      --color-bg-soft: #0b1220;
+      --color-accent: #00e5d4;
+      --color-accent-soft: rgba(0, 229, 212, 0.12);
+      --color-text-main: #0f172a;
+      --color-text-soft: #64748b;
+      --color-border-soft: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.45);
+      --radius-xl: 24px;
+    }
 
-    <!-- Bloquear indexación -->
-    <meta name="robots" content="noindex,nofollow,noarchive" />
-    <meta name="googlebot" content="noindex,nofollow" />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <style>
-      * {
-        box-sizing: border-box;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top right, #020617 0, #020617 45%, #020617 60%, #020617 100%);
+      color: #f9fafb;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: min(1120px, 100% - 2.5rem);
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: #ffffff;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #94a3b8;
+      border-left: 1px solid rgba(148, 163, 184, 0.4);
+      padding-left: 10px;
+      margin-left: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #0f172a;
+      opacity: 0.7;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .brand-tagline {
+        display: none;
       }
-
-      body,
-      html,
-      #app {
-        margin: 0;
-        width: 100%;
-        height: 100%;
+      .nav-links {
+        display: none;
       }
+    }
 
-      body {
-        touch-action: none;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          "Montserrat", sans-serif;
-        background:
-          radial-gradient(circle at top, rgba(0, 229, 212, 0.2), transparent 55%),
-          radial-gradient(circle at bottom, #000814, #020617);
-        color: #e5f5ff;
+    /* HERO */
+    .hero {
+      padding: 64px 0 48px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(0, 229, 212, 0.12), transparent 55%),
+        radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.16), transparent 55%),
+        linear-gradient(145deg, #020617, #020617);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      #app {
-        position: relative;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.75rem;
+      color: #e2e8f0;
+      margin-bottom: 16px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #facc15;
+      box-shadow: 0 0 0 6px rgba(250, 204, 21, 0.22);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #cbd5f5;
+      max-width: 34rem;
+      margin-bottom: 22px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-cta-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 0.8rem;
+      color: #9ca3af;
+      max-width: 420px;
+    }
+
+    .hero-cta-note strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(0, 229, 212, 0.16), transparent 55%),
+        linear-gradient(150deg, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .hero-card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .hero-card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+    }
+
+    .hero-card-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hero-timeline {
+      margin-top: 6px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      display: grid;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .hero-timeline-step {
+      display: flex;
+      gap: 10px;
+    }
+
+    .step-indicator {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      color: #cbd5f5;
+    }
+
+    .step-label {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      color: #9ca3af;
+      font-size: 0.76rem;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(circle at 30% 0, rgba(0, 229, 212, 0.24), transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.16), transparent 55%);
+      opacity: 0.28;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    /* CONTENT SECTIONS */
+
+    .section {
+      padding: 40px 0;
+      background: linear-gradient(180deg, #020617 0, #020617 45%, #020617 100%);
+      border-top: 1px solid rgba(15, 23, 42, 1);
+    }
+
+    .section-muted {
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .section-heading {
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section-text {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill-soft {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.78rem;
+      color: #cbd5e1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 880px) {
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      #canvas {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        overflow: hidden;
-        z-index: 0;
-      }
+    .card {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 14px 14px 16px;
+      font-size: 0.9rem;
+    }
 
-      /* Overlay Orbitienda */
+    .card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #94a3b8;
+      margin-bottom: 2px;
+    }
 
-      .overlay {
-        position: relative;
-        z-index: 1;
-        max-width: 460px;
-        width: 100%;
-        padding: 24px 22px 20px;
-        border-radius: 24px;
-        background:
-          radial-gradient(circle at top left, rgba(0, 229, 212, 0.16), transparent 60%),
-          rgba(15, 23, 42, 0.94);
-        border: 1px solid rgba(148, 163, 184, 0.5);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(16px);
-      }
+    .card-title {
+      font-size: 0.96rem;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
 
-      @media (min-width: 720px) {
-        .overlay {
-          padding: 30px 26px 22px;
-        }
-      }
+    .card-text {
+      font-size: 0.86rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
-      }
+    .status-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      font-size: 0.78rem;
+      color: #9ca3af;
+      align-items: center;
+    }
 
-      .logo-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 999px;
-        background:
-          radial-gradient(circle at 30% 20%, #ffffff, rgba(255, 255, 255, 0) 55%),
-          conic-gradient(from 210deg, #00e5d4, #0095a0, #00e5d4);
-        position: relative;
-        box-shadow:
-          0 0 0 1px rgba(15, 23, 42, 0.8),
-          0 12px 26px rgba(0, 0, 0, 0.75);
-      }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.24);
+    }
 
-      .logo-icon::after {
-        content: "";
-        position: absolute;
-        inset: 7px;
-        border-radius: 999px;
-        border: 2px solid rgba(15, 23, 42, 0.9);
-        border-top-color: rgba(255, 255, 255, 0.7);
-        opacity: 0.8;
-      }
+    .status-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      color: #e5e7eb;
+      font-size: 0.78rem;
+    }
 
-      .logo-text {
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        font-size: 1rem;
-      }
+    /* FOOTER */
 
-      .eyebrow {
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        color: #9caec4;
-        margin-bottom: 6px;
-      }
+    .footer {
+      border-top: 1px solid rgba(30, 41, 59, 0.85);
+      background: #020617;
+      padding: 18px 0 20px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
 
-      .title {
-        font-size: 1.8rem;
-        line-height: 1.15;
-        margin: 0 0 10px;
-      }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-      .subtitle {
-        margin: 0 0 18px;
-        font-size: 0.95rem;
-        line-height: 1.55;
-        color: #a9bdd5;
-      }
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
 
-      .cta-row {
-        display: flex;
+    .footer-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    @media (max-width: 640px) {
+      .footer-inner {
         flex-direction: column;
-        gap: 10px;
+        align-items: flex-start;
       }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="brand" aria-label="Inicio Orbitienda">
+        <img src="https://public.orbitienda.com/logo.png" alt="Orbitienda" />
+        <span class="brand-tagline">Empresa de tecnología para comercio digital</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#vision">Visión</a>
+        <a href="#estado">Estado</a>
+        <a href="#empresa">La compañía</a>
+      </nav>
+    </div>
+  </header>
 
-      .btn-primary {
-        border: none;
-        border-radius: 999px;
-        padding: 10px 18px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        background: linear-gradient(135deg, #00e5d4, #4dffd1);
-        color: #021417;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 14px 30px rgba(0, 229, 212, 0.4);
-        transition: transform 0.1s ease, box-shadow 0.1s.ease, filter 0.1s ease;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 18px 40px rgba(0, 229, 212, 0.5);
-        filter: brightness(1.03);
-      }
-
-      .btn-primary:active {
-        transform: translateY(0);
-        box-shadow: 0 9px 20px rgba(0, 229, 212, 0.35);
-      }
-
-      .note {
-        margin: 0;
-        font-size: 0.78rem;
-        color: #9caec4;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="app">
-      <canvas id="canvas"></canvas>
-
-      <div class="overlay">
-        <div class="brand">
-          <div class="logo-icon" aria-hidden="true"></div>
-          <div class="logo-text">Orbitienda</div>
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Plataforma en construcción</span>
+          </div>
+          <h1 class="hero-title">
+            Estamos construyendo el próximo capítulo del comercio digital.
+          </h1>
+          <p class="hero-subtitle">
+            Orbitienda es una compañía de tecnología enfocada en soluciones empresariales para el comercio digital.
+            Nuestra plataforma aún no está disponible al público: seguimos trabajando de forma interna y controlada.
+          </p>
+          <div class="hero-pills">
+            <span class="pill">Enfoque 100% empresarial</span>
+            <span class="pill">Diseñada para escalar</span>
+            <span class="pill">Hecha en Latinoamérica</span>
+          </div>
+          <div class="hero-cta-note">
+            <span><strong>Estado:</strong> desarrollo activo</span>
+            <span> · </span>
+            <span>Esta página es informativa. Sin pre-registros, sin formularios, sin promesas vacías.</span>
+          </div>
         </div>
 
-        <p class="eyebrow">Próximamente</p>
-
-        <h1 class="title">
-          Estamos creando el futuro del e-commerce.
-        </h1>
-
-        <p class="subtitle">
-          Una nueva forma de vender online, simple, cercana y pensada para
-          emprendedores y negocios de todos los tamaños.
-        </p>
-
-        <div class="cta-row">
-         
+        <div class="hero-visual">
+          <div class="hero-orbit" aria-hidden="true"></div>
+          <div class="hero-card" aria-label="Resumen de avance de Orbitienda">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Orbitienda · Proyecto</div>
+              </div>
+              <div class="hero-card-status">
+                <span class="hero-card-status-dot"></span>
+                En construcción
+              </div>
+            </div>
+            <div class="hero-timeline">
+              <div class="hero-timeline-step">
+                <div class="step-indicator">1</div>
+                <div>
+                  <div class="step-label">Definición estratégica</div>
+                  <div class="step-desc">Modelo de negocio, posicionamiento y foco empresarial alineados con el largo plazo.</div>
+                </div>
+              </div>
+              <div class="hero-timeline-step">
+                <div class="step-indicator">2</div>
+                <div>
+                  <div class="step-label">Desarrollo interno</div>
+                  <div class="step-desc">Construcción y validación técnica en entornos privados, con entregas iterativas.</div>
+                </div>
+              </div>
+              <div class="hero-timeline-step">
+                <div class="step-indicator">3</div>
+                <div>
+                  <div class="step-label">Lanzamiento gradual</div>
+                  <div class="step-desc">Accesos controlados antes de una apertura más amplia al mercado.</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- VISIÓN -->
+    <section id="vision" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-title">Visión</p>
+          <h2 class="section-heading">Una compañía pensada para empresas, desde el día uno.</h2>
+          <p class="section-text">
+            Orbitienda nace con una mirada empresarial sobre el comercio digital: procesos claros, estructura sólida y
+            decisiones cuidadas. No buscamos un lanzamiento apresurado, sino una plataforma construida con criterio
+            profesional.
+          </p>
+          <div class="pill-row">
+            <span class="pill-soft">Seriedad</span>
+            <span class="pill-soft">Gobernanza</span>
+            <span class="pill-soft">Escalabilidad</span>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <p class="card-label">Enfoque</p>
+            <h3 class="card-title">Empresa, no experimento</h3>
+            <p class="card-text">
+              Orbitienda se construye como compañía de tecnología con estructura formal, cumplimiento impositivo y
+              gestión responsable. La plataforma es una consecuencia de ese marco, no al revés.
+            </p>
+          </article>
+          <article class="card">
+            <p class="card-label">Criterio</p>
+            <h3 class="card-title">Ritmo controlado</h3>
+            <p class="card-text">
+              Elegimos avanzar por etapas: diseño, desarrollo interno y despliegue gradual. Sin promesas técnicas
+              públicas ni listas de funcionalidad anticipadas mientras todo está en movimiento.
+            </p>
+          </article>
+          <article class="card">
+            <p class="card-label">Largo plazo</p>
+            <h3 class="card-title">Construido para durar</h3>
+            <p class="card-text">
+              La ambición es acompañar a empresas y emprendedores en el tiempo. Por eso priorizamos estabilidad,
+              claridad de marca y una base sólida antes de hablar de características específicas.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESTADO DEL PROYECTO -->
+    <section id="estado" class="section section-muted">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-title">Estado</p>
+          <h2 class="section-heading">Plataforma en construcción, comunicación transparente.</h2>
+          <p class="section-text">
+            Hoy Orbitienda se encuentra en fase de desarrollo. No hay acceso público, no hay panel de clientes y
+            no hay lista de espera abierta. Esta página existe para dejar clara una sola idea: estamos trabajando.
+          </p>
+        </div>
+
+        <div class="status-strip">
+          <span class="status-dot"></span>
+          <span><strong>Situación actual:</strong> desarrollo interno y pruebas técnicas.</span>
+          <span class="status-chip">Sin fechas de lanzamiento publicadas</span>
+          <span class="status-chip">Sin formularios ni registros</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO DE LA EMPRESA -->
+    <section id="empresa" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-title">La compañía</p>
+          <h2 class="section-heading">Una marca cuidada, con identidad propia.</h2>
+          <p class="section-text">
+            Orbitienda se posiciona como una marca seria, con identidad visual consistente y una narrativa clara:
+            transparencia sobre el estado actual y respeto por el tiempo de quienes se interesan por el proyecto.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <p class="card-label">Identidad</p>
+            <h3 class="card-title">Marca empresarial</h3>
+            <p class="card-text">
+              Colores sobrios, tipografía limpia y un lenguaje pensado para negocios. El foco está puesto en la
+              confianza y en la claridad, no en la exageración.
+            </p>
+          </article>
+          <article class="card">
+            <p class="card-label">Comunicación</p>
+            <h3 class="card-title">Información justa</h3>
+            <p class="card-text">
+              Preferimos decir menos y cumplir más. Mientras Orbitienda esté en construcción, evitamos detallar
+              funcionalidades o promesas específicas sobre el producto final.
+            </p>
+          </article>
+          <article class="card">
+            <p class="card-label">Próximos pasos</p>
+            <h3 class="card-title">Novedades futuras</h3>
+            <p class="card-text">
+              En el futuro, las novedades oficiales se comunicarán por los canales corporativos de Orbitienda.
+              Por ahora, esta página es el único espacio público y se mantendrá simple y directa.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        © Orbitienda <span id="year"></span>. Todos los derechos reservados.
+      </div>
+      <div class="footer-right">
+        <span class="footer-pill">Compañía de tecnología en comercio digital</span>
+      </div>
     </div>
+  </footer>
 
-    <script type="module">
-      import AttractionCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.26/build/cursors/attraction1.min.js";
-
-      const app = AttractionCursor(document.getElementById("canvas"), {
-        particles: {
-          attractionIntensity: 0.75,
-          size: 1.5
-        }
-      });
-
-      // Fijamos los colores de las luces al Orbital Teal (y variante)
-      app.particles.light1.color.set(0x00e5d4); // Orbital Teal
-      app.particles.light2.color.set(0x0095a0); // Teal más oscuro
-    </script>
-  </body>
+  <script>
+    // Año dinámico, por prolijidad empresarial
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
