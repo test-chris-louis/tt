@@ -2,23 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Orbitienda — Plataforma en construcción</title>
+  <title>Orbitienda — El e-commerce en órbita</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Orbitienda es una compañía de tecnología enfocada en comercio digital. Nuestra plataforma se encuentra actualmente en construcción."
-  />
+  <meta name="description" content="Orbitienda es la nueva plataforma de e-commerce en órbita. Estamos en beta cerrada con tiendas seleccionadas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg-dark: #020617;
-      --color-bg-soft: #0b1220;
-      --color-accent: #00e5d4;
-      --color-accent-soft: rgba(0, 229, 212, 0.12);
-      --color-text-main: #0f172a;
-      --color-text-soft: #64748b;
-      --color-border-soft: rgba(148, 163, 184, 0.35);
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.45);
-      --radius-xl: 24px;
+      --bg-main: #020617;
+      --bg-elevated: rgba(15, 23, 42, 0.82);
+      --glass-border: rgba(148, 163, 184, 0.4);
+      --accent: #00e5d4;
+      --accent-soft: rgba(0, 229, 212, 0.18);
+      --accent-secondary: #b5ff3b;
+      --text-primary: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-soft: #64748b;
+      --surface-line: rgba(148, 163, 184, 0.2);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --transition-fast: 200ms ease-out;
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.9);
     }
 
     * {
@@ -27,650 +32,1432 @@
       padding: 0;
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", sans-serif;
-      background: radial-gradient(circle at top right, #020617 0, #020617 45%, #020617 60%, #020617 100%);
-      color: #f9fafb;
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #020617 0, #000 40%, #020617 100%);
+      color: var(--text-primary);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      width: min(1120px, 100% - 2.5rem);
-      margin: 0 auto;
+    body {
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* NAVBAR */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background-color: #ffffff;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .brand img {
-      height: 32px;
-      width: auto;
+    img {
+      max-width: 100%;
       display: block;
     }
 
-    .brand-tagline {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #94a3b8;
-      border-left: 1px solid rgba(148, 163, 184, 0.4);
-      padding-left: 10px;
-      margin-left: 6px;
+    /* Starfield background */
+
+    .starfield,
+    .starfield::before,
+    .starfield::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
     }
 
-    .nav-links {
+    .starfield {
+      background:
+        radial-gradient(circle at 20% 10%, rgba(0, 229, 212, 0.12), transparent 50%),
+        radial-gradient(circle at 80% 0%, rgba(181, 255, 59, 0.12), transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(56, 189, 248, 0.12), transparent 50%),
+        #020617;
+      filter: saturate(1.1);
+    }
+
+    .starfield::before,
+    .starfield::after {
+      content: "";
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.8) 0, transparent 60%),
+        radial-gradient(2px 2px at 80% 30%, rgba(255, 255, 255, 0.6) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 30% 70%, rgba(255, 255, 255, 0.6) 0, transparent 60%),
+        radial-gradient(2px 2px at 60% 50%, rgba(255, 255, 255, 0.75) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 90% 80%, rgba(255, 255, 255, 0.55) 0, transparent 60%);
+      opacity: 0.75;
+      animation: twinkle 12s linear infinite;
+    }
+
+    .starfield::after {
+      opacity: 0.5;
+      filter: blur(1px);
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+
+    @keyframes twinkle {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(-10px, 6px, 0);
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Layout */
+
+    .page {
+      min-height: 100vh;
+      position: relative;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(26px);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.82) 40%, transparent 100%);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .nav {
       display: flex;
       align-items: center;
-      gap: 24px;
-      font-size: 0.9rem;
+      justify-content: space-between;
+      padding: 1rem 0;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #0f172a;
-      opacity: 0.7;
-      transition: opacity 0.18s ease, transform 0.18s ease;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .nav-links a:hover {
-      opacity: 1;
+    .nav-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-tagline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-soft);
+      border-left: 1px solid rgba(148, 163, 184, 0.4);
+      padding-left: 0.75rem;
+      margin-left: 0.25rem;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .beta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at 0% 0%, rgba(0, 229, 212, 0.3), rgba(15, 23, 42, 0.8));
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #e5e7eb;
+    }
+
+    .beta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(0, 229, 212, 0.9);
+    }
+
+    .nav-email {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.2), rgba(15, 23, 42, 0.9));
+      backdrop-filter: blur(14px);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-email span {
+      max-width: 160px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .nav-email:hover {
+      border-color: rgba(0, 229, 212, 0.8);
+      background: radial-gradient(circle at top left, rgba(0, 229, 212, 0.18), rgba(15, 23, 42, 0.98));
       transform: translateY(-1px);
     }
 
-    @media (max-width: 720px) {
-      .brand-tagline {
+    @media (max-width: 640px) {
+      .nav-tagline {
         display: none;
       }
-      .nav-links {
-        display: none;
+      .nav-email span {
+        max-width: 120px;
       }
     }
 
-    /* HERO */
+    /* Hero */
+
     .hero {
-      padding: 64px 0 48px;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(0, 229, 212, 0.12), transparent 55%),
-        radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.16), transparent 55%),
-        linear-gradient(145deg, #020617, #020617);
+      position: relative;
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      padding: 3.5rem 0 4.5rem;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 3rem;
       align-items: center;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: minmax(0, 1fr);
       }
+      .hero {
+        padding-top: 2.5rem;
+      }
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(148, 163, 184, 0.6);
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-overline {
       font-size: 0.75rem;
-      color: #e2e8f0;
-      margin-bottom: 16px;
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #facc15;
-      box-shadow: 0 0 0 6px rgba(250, 204, 21, 0.22);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+      margin-bottom: 0.9rem;
     }
 
     .hero-title {
-      font-size: clamp(2rem, 3.2vw, 3rem);
-      line-height: 1.08;
+      font-size: clamp(2.6rem, 4vw, 3.6rem);
+      line-height: 1.05;
+      font-weight: 700;
       letter-spacing: -0.04em;
-      margin-bottom: 16px;
+      margin-bottom: 1.1rem;
+      background: linear-gradient(120deg, #e5f4ff, #ffffff, #a5f3fc);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: 0.98rem;
+    .hero-sub {
+      font-size: 1rem;
       line-height: 1.6;
-      color: #cbd5f5;
-      max-width: 34rem;
-      margin-bottom: 22px;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin-bottom: 1.8rem;
     }
 
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-
-    .pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.78rem;
-      color: #e5e7eb;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-cta-note {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.85);
-      font-size: 0.8rem;
-      color: #9ca3af;
-      max-width: 420px;
-    }
-
-    .hero-cta-note strong {
+    .hero-sub strong {
       color: #e5e7eb;
       font-weight: 500;
     }
 
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-card {
-      position: relative;
-      border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top left, rgba(0, 229, 212, 0.16), transparent 55%),
-        linear-gradient(150deg, #020617, #020617);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      padding: 20px 20px 18px;
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-    }
-
-    .hero-card-header {
+    .hero-ctas {
       display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 1.6rem;
     }
 
-    .hero-card-title {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #9ca3af;
-    }
-
-    .hero-card-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.76rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      background: rgba(22, 163, 74, 0.12);
-      color: #bbf7d0;
-    }
-
-    .hero-card-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .hero-timeline {
-      margin-top: 6px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-      display: grid;
-      gap: 12px;
-      font-size: 0.78rem;
-      color: #e5e7eb;
-    }
-
-    .hero-timeline-step {
-      display: flex;
-      gap: 10px;
-    }
-
-    .step-indicator {
-      margin-top: 2px;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
+    .btn-primary {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.68rem;
-      color: #cbd5f5;
+      gap: 0.55rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background-image:
+        linear-gradient(135deg, #00e5d4, #b5ff3b),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 14px 45px rgba(0, 229, 212, 0.5);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: #020617;
+      overflow: hidden;
+      transition: transform 160ms ease-out, box-shadow 160ms ease-out;
     }
 
-    .step-label {
-      font-weight: 500;
-      margin-bottom: 2px;
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
     }
 
-    .step-desc {
-      color: #9ca3af;
-      font-size: 0.76rem;
-    }
-
-    .hero-orbit {
+    .btn-primary::before {
+      content: "";
       position: absolute;
-      inset: -60%;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.7), transparent 60%);
+      opacity: 0;
+      transition: opacity 200ms ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 55px rgba(0, 229, 212, 0.6);
+    }
+
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+
+    .cta-secondary {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .cta-secondary span {
+      color: var(--text-muted);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .meta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-secondary);
+      box-shadow: 0 0 12px rgba(181, 255, 59, 0.8);
+    }
+
+    /* Hero orbit visual */
+
+    .hero-right-wrap {
+      position: relative;
+    }
+
+    .hero-orbit-shell {
+      position: relative;
+      border-radius: 999px;
+      padding: 1.5px;
       background:
-        radial-gradient(circle at 30% 0, rgba(0, 229, 212, 0.24), transparent 55%),
-        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.16), transparent 55%);
-      opacity: 0.28;
-      pointer-events: none;
+        conic-gradient(from 140deg, rgba(0, 229, 212, 0.6), rgba(59, 130, 246, 0.4), rgba(181, 255, 59, 0.6), rgba(0, 229, 212, 0.6));
+      box-shadow: 0 0 55px rgba(0, 229, 212, 0.35);
+      max-width: 480px;
+      margin-left: auto;
+    }
+
+    .hero-orbit-core {
+      position: relative;
+      isolation: isolate;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(0, 229, 212, 0.35), transparent 60%),
+        radial-gradient(circle at 85% 80%, rgba(181, 255, 59, 0.25), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      padding: 2.3rem 2.15rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(26px);
+    }
+
+    .orbit-bg-glow {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)),
+        radial-gradient(circle at 0% 20%, rgba(0, 229, 212, 0.4), transparent 60%),
+        radial-gradient(circle at 100% 80%, rgba(52, 211, 153, 0.45), transparent 70%);
+      opacity: 0.65;
       mix-blend-mode: screen;
+      pointer-events: none;
     }
 
-    /* CONTENT SECTIONS */
-
-    .section {
-      padding: 40px 0;
-      background: linear-gradient(180deg, #020617 0, #020617 45%, #020617 100%);
-      border-top: 1px solid rgba(15, 23, 42, 1);
+    .orbit-core-inner {
+      position: relative;
+      z-index: 1;
     }
 
-    .section-muted {
-      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+    .orbit-title {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .orbit-main-label {
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .orbit-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      max-width: 320px;
+    }
+
+    .orbit-rings {
+      position: relative;
+      height: 210px;
+      margin-bottom: 1rem;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      inset: 18px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      opacity: 0.5;
+      transform-origin: center center;
+      animation: orbit-rotate 40s linear infinite;
+    }
+
+    .orbit-ring:nth-child(2) {
+      inset: 42px 26px;
+      opacity: 0.35;
+      animation-duration: 28s;
+      animation-direction: reverse;
+    }
+
+    .orbit-ring:nth-child(3) {
+      inset: 68px 54px;
+      opacity: 0.45;
+      border-style: dashed;
+      animation-duration: 54s;
+    }
+
+    @keyframes orbit-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .orbit-node {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 0.6rem;
+      color: #e5e7eb;
+    }
+
+    .orbit-node--primary {
+      width: 94px;
+      height: 94px;
+      border-radius: 999px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(0, 229, 212, 0.75);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(0, 229, 212, 0.5), transparent 60%),
+        rgba(15, 23, 42, 0.96);
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+
+    .orbit-node--storefront {
+      top: 6%;
+      left: 14%;
+    }
+
+    .orbit-node--shipping {
+      top: 20%;
+      right: 6%;
+    }
+
+    .orbit-node--payments {
+      bottom: 5%;
+      left: 34%;
+    }
+
+    .orbit-node--ai {
+      bottom: 14%;
+      right: 10%;
+    }
+
+    .orbit-node::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.12), transparent 65%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .orbit-node[data-parallax-speed] {
+      transition: transform 120ms linear;
+    }
+
+    .orbit-meta {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .orbit-meta-badge {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at 0 0, rgba(0, 229, 212, 0.2), rgba(15, 23, 42, 0.9));
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 900px) {
+      .hero-orbit-shell {
+        margin: 0 auto;
+        max-width: 420px;
+      }
+      .hero {
+        padding-bottom: 4rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-orbit-core {
+        padding: 1.8rem 1.6rem;
+      }
+      .orbit-rings {
+        height: 180px;
+      }
+      .orbit-node {
+        font-size: 0.65rem;
+      }
+    }
+
+    /* Sections */
+
+    section {
+      padding: 4.5rem 0;
+      position: relative;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      pointer-events: none;
+      background: radial-gradient(circle at top center, rgba(15, 23, 42, 0.3), transparent 50%);
     }
 
     .section-header {
-      margin-bottom: 24px;
-      max-width: 640px;
+      margin-bottom: 2.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-soft);
     }
 
     .section-title {
-      font-size: 1.2rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-      margin-bottom: 6px;
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
     }
 
-    .section-heading {
-      font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
+    .section-title span {
+      background: linear-gradient(120deg, #e5f4ff, #a5f3fc);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-    .section-text {
-      font-size: 0.95rem;
-      color: #9ca3af;
-      line-height: 1.7;
+    .section-sub {
+      font-size: 0.94rem;
+      max-width: 460px;
+      color: var(--text-muted);
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    /* Feature grid */
 
-    .pill-soft {
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.78rem;
-      color: #cbd5e1;
-    }
-
-    .grid-3 {
+    .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 10px;
+      gap: 1.6rem;
     }
 
-    @media (max-width: 880px) {
-      .grid-3 {
+    @media (max-width: 960px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .feature-grid {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
-    .card {
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      padding: 14px 14px 16px;
-      font-size: 0.9rem;
+    .feature-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.35rem;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+      border: 1px solid rgba(15, 23, 42, 0.96);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: opacity 280ms ease-out, transform 280ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out;
     }
 
-    .card-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #94a3b8;
-      margin-bottom: 2px;
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background:
+        linear-gradient(130deg, rgba(148, 163, 184, 0.55), transparent 30%, transparent 60%, rgba(0, 229, 212, 0.8));
+      opacity: 0;
+      mix-blend-mode: screen;
+      transition: opacity 220ms ease-out;
+      pointer-events: none;
     }
 
-    .card-title {
-      font-size: 0.96rem;
-      color: #e5e7eb;
-      margin-bottom: 6px;
+    .feature-card:hover {
+      border-color: rgba(148, 163, 184, 0.7);
+      box-shadow: 0 18px 70px rgba(15, 23, 42, 1);
     }
 
-    .card-text {
-      font-size: 0.86rem;
-      color: #9ca3af;
-      line-height: 1.5;
+    .feature-card:hover::before {
+      opacity: 0.7;
     }
 
-    .status-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-      border-radius: 999px;
-      padding: 8px 10px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px dashed rgba(148, 163, 184, 0.6);
+    .feature-label {
       font-size: 0.78rem;
-      color: #9ca3af;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .feature-meta {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .feature-badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e5e7eb;
+    }
+
+    .feature-badge--accent {
+      border-color: rgba(0, 229, 212, 0.7);
+      background: radial-gradient(circle at 0 0, rgba(0, 229, 212, 0.3), rgba(15, 23, 42, 0.96));
+    }
+
+    .feature-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(148, 163, 184, 0.7), transparent);
+    }
+
+    /* Architecture section */
+
+    .arch-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr);
+      gap: 2.5rem;
       align-items: center;
     }
 
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.24);
+    @media (max-width: 900px) {
+      .arch-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    .status-chip {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
+    .arch-card {
+      border-radius: var(--radius-xl);
+      padding: 1.6rem 1.6rem 1.8rem;
+      background:
+        radial-gradient(circle at top left, rgba(0, 229, 212, 0.28), transparent 40%),
+        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(26px);
+      transform: translateY(8px);
+      opacity: 0;
+      transition: opacity 300ms ease-out, transform 300ms ease-out;
+    }
+
+    .arch-label {
+      font-size: 0.76rem;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
       color: #e5e7eb;
-      font-size: 0.78rem;
+      margin-bottom: 0.9rem;
     }
 
-    /* FOOTER */
-
-    .footer {
-      border-top: 1px solid rgba(30, 41, 59, 0.85);
-      background: #020617;
-      padding: 18px 0 20px;
-      font-size: 0.78rem;
-      color: #6b7280;
+    .arch-title {
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
     }
 
-    .footer-inner {
+    .arch-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+      max-width: 440px;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .arch-pill {
+      border-radius: 999px;
+      padding: 0.65rem 0.9rem;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+
+    .arch-pill span {
+      font-size: 0.73rem;
+      color: var(--text-soft);
+    }
+
+    .arch-diagram {
+      border-radius: 24px;
+      padding: 1.4rem 1.3rem;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(30, 64, 175, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .arch-diagram::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(0, 229, 212, 0.32), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(59, 130, 246, 0.38), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .arch-diagram-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .arch-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      margin-bottom: 1.1rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .arch-row-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .arch-badge {
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.66);
+      font-size: 0.72rem;
+      color: #e5e7eb;
+    }
+
+    .arch-stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+      font-size: 0.76rem;
+    }
+
+    .arch-stack-col {
+      border-radius: 18px;
+      padding: 0.6rem 0.7rem;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .arch-stack-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      margin-bottom: 0.3rem;
+      color: #e5e7eb;
+    }
+
+    .arch-stack-item {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .arch-footnote {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .arch-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 229, 212, 0.8);
+    }
+
+    /* Beta section */
+
+    .beta-card {
+      border-radius: var(--radius-xl);
+      padding: 2.1rem 2rem;
+      background:
+        radial-gradient(circle at 100% 0, rgba(181, 255, 59, 0.3), transparent 50%),
+        radial-gradient(circle at 0 100%, rgba(0, 229, 212, 0.3), transparent 55%),
+        rgba(2, 6, 23, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(26px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: opacity 320ms ease-out, transform 320ms ease-out;
+    }
+
+    @media (max-width: 900px) {
+      .beta-card {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.7rem 1.5rem;
+      }
+    }
+
+    .beta-label {
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 0.9rem;
+    }
+
+    .beta-title {
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .beta-body {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      max-width: 480px;
+    }
+
+    .beta-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .beta-email-block {
+      border-radius: 18px;
+      padding: 0.85rem 1rem;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .beta-email-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .beta-email-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .beta-email-address {
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+
+    .beta-copy {
+      font-size: 0.78rem;
+      color: var(--accent);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .beta-copy:hover {
+      text-decoration: underline;
+    }
+
+    .beta-points {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
+    }
+
+    .beta-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .beta-point-marker {
+      margin-top: 0.25rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 2rem 0 3rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .footer-line {
+      height: 1px;
+      background: linear-gradient(to right, rgba(148, 163, 184, 0.5), transparent);
+      margin-bottom: 1.4rem;
+      opacity: 0.7;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      align-items: center;
       flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .footer-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
     }
 
     .footer-right {
       display: flex;
+      gap: 1.2rem;
       flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
     }
 
-    .footer-pill {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.9);
+    .footer-right span {
+      opacity: 0.9;
     }
 
-    @media (max-width: 640px) {
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* Reveal animation helper */
+
+    .reveal-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="container navbar-inner">
-      <a href="#" class="brand" aria-label="Inicio Orbitienda">
-        <img src="https://public.orbitienda.com/logo.png" alt="Orbitienda" />
-        <span class="brand-tagline">Empresa de tecnología para comercio digital</span>
-      </a>
-      <nav class="nav-links" aria-label="Navegación principal">
-        <a href="#vision">Visión</a>
-        <a href="#estado">Estado</a>
-        <a href="#empresa">La compañía</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span>Plataforma en construcción</span>
+  <div class="starfield"></div>
+  <div class="page">
+    <header>
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-left">
+            <img src="https://public.orbitienda.com/logo_white.png" alt="Orbitienda" class="nav-logo" />
+            <div class="nav-tagline">E-commerce en órbita</div>
           </div>
-          <h1 class="hero-title">
-            Estamos construyendo el próximo capítulo del comercio digital.
-          </h1>
-          <p class="hero-subtitle">
-            Orbitienda es una compañía de tecnología enfocada en soluciones empresariales para el comercio digital.
-            Nuestra plataforma aún no está disponible al público: seguimos trabajando de forma interna y controlada.
-          </p>
-          <div class="hero-pills">
-            <span class="pill">Enfoque 100% empresarial</span>
-            <span class="pill">Diseñada para escalar</span>
-            <span class="pill">Hecha en Latinoamérica</span>
-          </div>
-          <div class="hero-cta-note">
-            <span><strong>Estado:</strong> desarrollo activo</span>
-            <span> · </span>
-            <span>Esta página es informativa. Sin pre-registros, sin formularios, sin promesas vacías.</span>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="hero-orbit" aria-hidden="true"></div>
-          <div class="hero-card" aria-label="Resumen de avance de Orbitienda">
-            <div class="hero-card-header">
-              <div>
-                <div class="hero-card-title">Orbitienda · Proyecto</div>
-              </div>
-              <div class="hero-card-status">
-                <span class="hero-card-status-dot"></span>
-                En construcción
-              </div>
+          <div class="nav-right">
+            <div class="beta-pill">
+              <span class="beta-dot"></span>
+              <span>Beta cerrada</span>
             </div>
-            <div class="hero-timeline">
-              <div class="hero-timeline-step">
-                <div class="step-indicator">1</div>
-                <div>
-                  <div class="step-label">Definición estratégica</div>
-                  <div class="step-desc">Modelo de negocio, posicionamiento y foco empresarial alineados con el largo plazo.</div>
+            <a href="mailto:chris@orbitienda.com" class="nav-email">
+              <span>chris@orbitienda.com</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-left reveal">
+              <div class="hero-overline">Plataforma de e-commerce</div>
+              <h1 class="hero-title">
+                Tu tienda, en la órbita<br />de la próxima generación.
+              </h1>
+              <p class="hero-sub">
+                Orbitienda es una plataforma de e-commerce pensada para marcas que
+                quieren crecer en serio: <strong>infraestructura moderna, diseño premium
+                y experiencia cuidada</strong>, desde el primer checkout.
+              </p>
+              <div class="hero-ctas">
+                <a href="mailto:chris@orbitienda.com?subject=Quiero%20sumarme%20a%20la%20beta%20cerrada%20de%20Orbitienda"
+                   class="btn-primary">
+                  <span>Sumarme a la beta cerrada</span>
+                </a>
+                <div class="cta-secondary">
+                  <div>Tiendas selectas en Argentina y LATAM.</div>
+                  <span>Acceso por invitación.</span>
                 </div>
               </div>
-              <div class="hero-timeline-step">
-                <div class="step-indicator">2</div>
-                <div>
-                  <div class="step-label">Desarrollo interno</div>
-                  <div class="step-desc">Construcción y validación técnica en entornos privados, con entregas iterativas.</div>
+              <div class="hero-meta">
+                <div class="meta-item">
+                  <span class="meta-dot"></span>
+                  <span>Infraestructura cloud lista para escalar.</span>
                 </div>
-              </div>
-              <div class="hero-timeline-step">
-                <div class="step-indicator">3</div>
-                <div>
-                  <div class="step-label">Lanzamiento gradual</div>
-                  <div class="step-desc">Accesos controlados antes de una apertura más amplia al mercado.</div>
+                <div class="meta-item">
+                  <span>Optimizada para pagos y logística regional.</span>
                 </div>
               </div>
             </div>
+
+            <div class="hero-right-wrap">
+              <div class="hero-orbit-shell reveal" data-parallax-speed="0.15">
+                <div class="hero-orbit-core">
+                  <div class="orbit-bg-glow"></div>
+                  <div class="orbit-core-inner">
+                    
+                    <div class="orbit-rings">
+                      <div class="orbit-ring"></div>
+                      <div class="orbit-ring"></div>
+                      <div class="orbit-ring"></div>
+
+                      <div class="orbit-node orbit-node--primary" data-parallax-speed="0.25">
+                        Core Orbitienda<br />Multitenant
+                      </div>
+
+                      <div class="orbit-node orbit-node--storefront" data-parallax-speed="-0.18">
+                        Payments
+                      </div>
+
+                      <div class="orbit-node orbit-node--shipping" data-parallax-speed="0.18">
+                        Shipping
+                      </div>
+
+                      <div class="orbit-node orbit-node--payments" data-parallax-speed="-0.12">
+                        AI
+                      </div>
+
+                      <div class="orbit-node orbit-node--ai" data-parallax-speed="0.22">
+                        Tooling
+                      </div>
+                    </div>
+
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section>
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-eyebrow">Pensada para marcas exigentes</div>
+            <h2 class="section-title">
+              Una plataforma <span>sobria, rápida</span> y lista para escalar.
+            </h2>
+            <p class="section-sub">
+              Estamos construyendo Orbitienda con una premisa clara: menos fricción
+              para el equipo, más foco en vender y entregar una experiencia consistente al cliente final.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <div class="feature-label">Experiencia de tienda</div>
+              <h3 class="feature-title">Diseños claros y centrados en conversión.</h3>
+              <p class="feature-body">
+                Storefronts modernos, con foco en performance y una navegación simple.
+                Ideal para marcas que buscan transmitir solidez sin perder velocidad.
+              </p>
+              <div class="feature-meta">
+                <span class="feature-badge feature-badge--accent">Liquid glass UI</span>
+                <div class="feature-line"></div>
+              </div>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-label">Operación</div>
+              <h3 class="feature-title">Core estable para el día a día.</h3>
+              <p class="feature-body">
+                Pensada como plataforma, no como experimento: catálogos ordenados,
+                carritos robustos y flujos de checkout preparados para volumen.
+              </p>
+              <div class="feature-meta">
+                <span class="feature-badge">Multitienda</span>
+                <div class="feature-line"></div>
+              </div>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-label">Integraciones</div>
+              <h3 class="feature-title">Pagos y envíos listos para la región.</h3>
+              <p class="feature-body">
+                Integraciones con medios de pago y operadores logísticos líderes,
+                para que el ecosistema de tu tienda funcione como un solo sistema.
+              </p>
+              <div class="feature-meta">
+                <span class="feature-badge">LATAM-ready</span>
+                <div class="feature-line"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE / SERIOUSNESS -->
+      <section>
+        <div class="container">
+          <div class="arch-layout">
+            <div class="arch-card reveal">
+              <div class="arch-label">Arquitectura</div>
+              <h2 class="arch-title">Tecnología moderna, con criterio.</h2>
+              <p class="arch-body">
+                Orbitienda se construye sobre una arquitectura cloud preparada para escalar
+                de forma gradual, cuidando el rendimiento y la estabilidad antes que la
+                cantidad de funcionalidades visibles.
+              </p>
+              <div class="arch-grid">
+                <div class="arch-pill">
+                  <div>
+                    Core API first
+                    <span>Preparado para integraciones futuras.</span>
+                  </div>
+                </div>
+                <div class="arch-pill">
+                  <div>
+                    Storefronts rápidos
+                    <span>Enfoque en tiempos de carga y UX.</span>
+                  </div>
+                </div>
+                <div class="arch-pill">
+                  <div>
+                    Seguridad por diseño
+                    <span>Manejo responsable de datos.</span>
+                  </div>
+                </div>
+                <div class="arch-pill">
+                  <div>
+                    Infraestructura flexible
+                    <span>Escala progresiva según demanda.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="arch-diagram reveal" data-parallax-speed="-0.12">
+              <div class="arch-diagram-inner">
+                <div class="arch-row">
+                  <div class="arch-row-label">Orbitienda</div>
+                  <div class="arch-badge">Closed beta</div>
+                </div>
+                <div class="arch-stack-grid">
+                  <div class="arch-stack-col">
+                    <div class="arch-stack-title">Storefront</div>
+                    <div class="arch-stack-item">UI optimizada para mobile</div>
+                    <div class="arch-stack-item">Diseño centrado en marca</div>
+                  </div>
+                  <div class="arch-stack-col">
+                    <div class="arch-stack-title">Operación</div>
+                    <div class="arch-stack-item">Catálogo &amp; stock</div>
+                    <div class="arch-stack-item">Carrito &amp; checkout</div>
+                  </div>
+                  <div class="arch-stack-col">
+                    <div class="arch-stack-title">Ecosistema</div>
+                    <div class="arch-stack-item">Pagos online</div>
+                    <div class="arch-stack-item">Logística &amp; envíos</div>
+                  </div>
+                </div>
+                <div class="arch-footnote">
+                  <span class="arch-dot"></span>
+                  <span>
+                    La beta cerrada se enfoca en validar performance, operación diaria y
+                    experiencia real con tiendas seleccionadas.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BETA CTA -->
+      <section>
+        <div class="container">
+          <div class="beta-card reveal">
+            <div>
+              <div class="beta-label">Beta cerrada</div>
+              <h2 class="beta-title">Probando Orbitienda con tiendas reales.</h2>
+              <p class="beta-body">
+                Estamos en una etapa de construcción silenciosa, trabajando junto
+                a un grupo reducido de marcas para validar cada parte del flujo:
+                desde la carga de productos hasta el paquete entregado al cliente.
+              </p>
+              <p class="beta-note">
+                Si creés que tu tienda puede sumar a esta etapa y querés ser parte
+                de las primeras implementaciones, podés escribirnos.
+              </p>
+            </div>
+            <div>
+              <div class="beta-email-block">
+                <div class="beta-email-main">
+                  <div class="beta-email-label">Contacto para beta cerrada</div>
+                  <a href="mailto:chris@orbitienda.com?subject=Beta%20cerrada%20Orbitienda"
+                     class="beta-email-address">
+                    info@orbitienda.com
+                  </a>
+                </div>
+                <div class="beta-copy" id="copyEmail">Copiar correo</div>
+              </div>
+              <div class="beta-points" style="margin-top: 1rem;">
+                <div class="beta-point">
+                  <div class="beta-point-marker"></div>
+                  <div>Acceso limitado a tiendas con operación activa y foco en crecimiento.</div>
+                </div>
+                <div class="beta-point">
+                  <div class="beta-point-marker"></div>
+                  <div>Acompañamiento cercano durante la implementación y el ramp-up inicial.</div>
+                </div>
+                <div class="beta-point">
+                  <div class="beta-point-marker"></div>
+                  <div>Orientado a relaciones de largo plazo con aliados estratégicos.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-line"></div>
+        <div class="footer-grid">
+          <div class="footer-left">
+            <div class="footer-dot"></div>
+            <div>Orbitienda &mdash; DATAXYPE SAS</div>
+          </div>
+          <div class="footer-right">
+            <span>Closed beta · 2025</span>
+            <span>Contacto: <a href="mailto:info@orbitienda.com">info@orbitienda.com</a></span>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- VISIÓN -->
-    <section id="vision" class="section">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-title">Visión</p>
-          <h2 class="section-heading">Una compañía pensada para empresas, desde el día uno.</h2>
-          <p class="section-text">
-            Orbitienda nace con una mirada empresarial sobre el comercio digital: procesos claros, estructura sólida y
-            decisiones cuidadas. No buscamos un lanzamiento apresurado, sino una plataforma construida con criterio
-            profesional.
-          </p>
-          <div class="pill-row">
-            <span class="pill-soft">Seriedad</span>
-            <span class="pill-soft">Gobernanza</span>
-            <span class="pill-soft">Escalabilidad</span>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <p class="card-label">Enfoque</p>
-            <h3 class="card-title">Empresa, no experimento</h3>
-            <p class="card-text">
-              Orbitienda se construye como compañía de tecnología con estructura formal, cumplimiento impositivo y
-              gestión responsable. La plataforma es una consecuencia de ese marco, no al revés.
-            </p>
-          </article>
-          <article class="card">
-            <p class="card-label">Criterio</p>
-            <h3 class="card-title">Ritmo controlado</h3>
-            <p class="card-text">
-              Elegimos avanzar por etapas: diseño, desarrollo interno y despliegue gradual. Sin promesas técnicas
-              públicas ni listas de funcionalidad anticipadas mientras todo está en movimiento.
-            </p>
-          </article>
-          <article class="card">
-            <p class="card-label">Largo plazo</p>
-            <h3 class="card-title">Construido para durar</h3>
-            <p class="card-text">
-              La ambición es acompañar a empresas y emprendedores en el tiempo. Por eso priorizamos estabilidad,
-              claridad de marca y una base sólida antes de hablar de características específicas.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ESTADO DEL PROYECTO -->
-    <section id="estado" class="section section-muted">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-title">Estado</p>
-          <h2 class="section-heading">Plataforma en construcción, comunicación transparente.</h2>
-          <p class="section-text">
-            Hoy Orbitienda se encuentra en fase de desarrollo. No hay acceso público, no hay panel de clientes y
-            no hay lista de espera abierta. Esta página existe para dejar clara una sola idea: estamos trabajando.
-          </p>
-        </div>
-
-        <div class="status-strip">
-          <span class="status-dot"></span>
-          <span><strong>Situación actual:</strong> desarrollo interno y pruebas técnicas.</span>
-          <span class="status-chip">Sin fechas de lanzamiento publicadas</span>
-          <span class="status-chip">Sin formularios ni registros</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- INFO DE LA EMPRESA -->
-    <section id="empresa" class="section">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-title">La compañía</p>
-          <h2 class="section-heading">Una marca cuidada, con identidad propia.</h2>
-          <p class="section-text">
-            Orbitienda se posiciona como una marca seria, con identidad visual consistente y una narrativa clara:
-            transparencia sobre el estado actual y respeto por el tiempo de quienes se interesan por el proyecto.
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <p class="card-label">Identidad</p>
-            <h3 class="card-title">Marca empresarial</h3>
-            <p class="card-text">
-              Colores sobrios, tipografía limpia y un lenguaje pensado para negocios. El foco está puesto en la
-              confianza y en la claridad, no en la exageración.
-            </p>
-          </article>
-          <article class="card">
-            <p class="card-label">Comunicación</p>
-            <h3 class="card-title">Información justa</h3>
-            <p class="card-text">
-              Preferimos decir menos y cumplir más. Mientras Orbitienda esté en construcción, evitamos detallar
-              funcionalidades o promesas específicas sobre el producto final.
-            </p>
-          </article>
-          <article class="card">
-            <p class="card-label">Próximos pasos</p>
-            <h3 class="card-title">Novedades futuras</h3>
-            <p class="card-text">
-              En el futuro, las novedades oficiales se comunicarán por los canales corporativos de Orbitienda.
-              Por ahora, esta página es el único espacio público y se mantendrá simple y directa.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        © Orbitienda <span id="year"></span>. Todos los derechos reservados.
-      </div>
-      <div class="footer-right">
-        <span class="footer-pill">Compañía de tecnología en comercio digital</span>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script>
-    // Año dinámico, por prolijidad empresarial
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Reveal on scroll
+    (function () {
+      var revealEls = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || revealEls.length === 0) {
+        // Fallback: show everything
+        revealEls.forEach(function (el) {
+          el.classList.add("reveal-visible");
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15
+      });
+
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+
+    // Parallax effect for elements with data-parallax-speed
+    (function () {
+      var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
+      if (parallaxEls.length === 0) return;
+
+      var ticking = false;
+
+      function updateParallax() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        parallaxEls.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute("data-parallax-speed")) || 0;
+          var offset = scrollY * speed;
+          var current = el.dataset.baseTranslate || 0;
+          el.style.transform = "translateY(" + (offset + parseFloat(current)) + "px)";
+        });
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", function () {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+    })();
+
+    // Copy email helper
+    (function () {
+      var copyBtn = document.getElementById("copyEmail");
+      if (!copyBtn || !navigator.clipboard) return;
+
+      var email = "chris@orbitienda.com";
+      copyBtn.addEventListener("click", function () {
+        navigator.clipboard.writeText(email).then(function () {
+          var original = copyBtn.textContent;
+          copyBtn.textContent = "Copiado ✓";
+          setTimeout(function () {
+            copyBtn.textContent = original;
+          }, 1600);
+        }).catch(function () {
+          // silent fail, no drama
+        });
+      });
+    })();
   </script>
 </body>
 </html>
